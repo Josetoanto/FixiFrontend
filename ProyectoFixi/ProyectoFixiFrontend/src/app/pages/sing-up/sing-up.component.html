@@ -1,0 +1,54 @@
+<div class="VistaPrincipal">
+    <div class="AmbasColumnas">
+      <div id="mujer">
+        <img id="mujerImg" src="signUp.jpg" alt="Imagen de registro" />
+      </div>
+  
+      <div id="ColumnaPrincipal">
+        <h2 id="tituloSesion">Registro de Usuario</h2>
+        
+        <h4 id="inicioText">Correo electrónico</h4>
+        <input
+          type="email"
+          id="email"
+          placeholder="Ingresa tu correo"
+        />
+  
+        <h4 id="tipoUsuarioText">Tipo de usuario</h4>
+        <select id="tipoUsuario">
+          <option value="fixi">Fixi</option>
+          <option value="cliente">Cliente</option>
+        </select>
+  
+        <h4 id="passwordText">Contraseña</h4>
+        <input
+          type="password"
+          id="password"
+          placeholder="Ingresa tu contraseña"
+        />
+  
+        <h4 id="passwordTextConfirm">Confirmar contraseña</h4>
+        <input
+          type="password"
+          id="passwordConfirm"
+          placeholder="Repite tu contraseña"
+        />
+  
+        <div class="error-message"></div>
+        
+        <button (click)="goToLogin()" id="entrarbtn">Registrarse</button>
+        
+        <h3 id="continue">Continuar con</h3>
+        <button id="googlebtn">
+          Registrarse con Google (Próximamente)
+          <img id="googleIcon" src="google-icon.png" alt="Google Icono" />
+        </button>
+        
+        <h3 id="pregunta">
+          ¿Ya tienes cuenta?
+          <button (click)="goToLogin()" id="iniciarSesion">Inicia sesión</button>
+        </h3>
+      </div>
+    </div>
+  </div>
+  
