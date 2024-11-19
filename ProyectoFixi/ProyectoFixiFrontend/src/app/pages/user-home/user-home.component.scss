@@ -8,10 +8,10 @@
 
 .cardContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-columns: repeat(3, 1fr); 
     grid-gap: 20px;
     padding: 20px;
     width: 100%;
-    max-width: 1200px; /* Tamaño máximo de la cuadrícula */
-    margin: 0 auto; /* Centra la cuadrícula */
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
