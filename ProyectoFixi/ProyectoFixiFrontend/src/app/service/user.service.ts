@@ -64,7 +64,7 @@ export class UserService {
           this.router.navigate(['/']); // Redirige al home
         }
       }
-    }, 60000); // Verifica cada 60 segundos
+    }, 180000); // Verifica cada 60 segundos
   }
 
   // Verificar si el usuario está autenticado
@@ -83,6 +83,7 @@ export class UserService {
     sessionStorage.removeItem('tokenExpiration');
   }
 
+  
   getUsers(skip: number = 0, limit: number = 10): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/users?skip=${skip}&limit=${limit}`, { headers }).pipe(

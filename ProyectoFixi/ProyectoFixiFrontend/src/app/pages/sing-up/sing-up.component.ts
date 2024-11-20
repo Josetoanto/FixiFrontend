@@ -21,6 +21,8 @@ export class SingUpComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
+  
+
   goToLogin() {
     this.router.navigate(['/login']);
   }
