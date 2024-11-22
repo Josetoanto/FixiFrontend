@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://lh8wfcbm-8001.use2.devtunnels.ms'; // Cambia esta URL según sea necesario
+  private apiUrl = 'https://lh8wfcbm-8001.use2.devtunnels.ms'; 
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) {
     this.checkTokenExpiration(); // Inicia la verificación al cargar el servicio
   }
 
-  // Método para registrar usuario
   register(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/users/`, userData).pipe(
       tap((response: any) => {
@@ -28,11 +27,10 @@ export class UserService {
     );
   }
 
-   // Método para logear usuario
    login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/token`, { email, password }).pipe(
       tap((response: any) => {
-        this.saveToken(response.access_token);  // Guardamos el token
+        this.saveToken(response.access_token);  
       }),
       catchError((error) => {
         console.error('Error durante el logeo:', error);
@@ -41,43 +39,37 @@ export class UserService {
     );
   }
 
-  // Guardar token en Session Storage
   private saveToken(token: string): void {
     sessionStorage.setItem(this.tokenKey, token);
-    // Decodificar el token para obtener la fecha de expiración
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del JWT
-    const expiration = payload.exp * 1000; // Convertir a milisegundos
+    const payload = JSON.parse(atob(token.split('.')[1])); 
+    const expiration = payload.exp * 1000; 
     sessionStorage.setItem('tokenExpiration', expiration.toString());
   }
-  // Obtener token
-  getToken(): string | null {
-    return sessionStorage.getItem(this.tokenKey);
-  }
-
   private checkTokenExpiration(): void {
     setInterval(() => {
       const expiration = sessionStorage.getItem('tokenExpiration');
       if (expiration) {
         const now = new Date().getTime();
         if (now > parseInt(expiration, 10)) {
-          this.logout(); // Elimina el token
-          this.router.navigate(['/']); // Redirige al home
+          this.logout(); 
+          this.router.navigate(['/']);
         }
       }
-    }, 180000); // Verifica cada 60 segundos
+    }, 60000); // Verifica cada 60 segundos
+  }
+  getToken(): string | null {
+    return sessionStorage.getItem(this.tokenKey);
   }
 
-  // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
   private getAuthHeaders(): { [header: string]: string } {
-    const token = this.getToken(); // Recupera el token desde sessionStorage
+    const token = this.getToken();
     return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
-  // Eliminar token (Cerrar sesión)
   logout(): void {
     sessionStorage.removeItem(this.tokenKey);
     sessionStorage.removeItem('tokenExpiration');
