@@ -12,7 +12,6 @@ export class UserService {
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) {
-    this.checkTokenExpiration(); // Inicia la verificación al cargar el servicio
   }
 
   register(userData: any): Observable<any> {
@@ -45,18 +44,7 @@ export class UserService {
     const expiration = payload.exp * 1000; 
     sessionStorage.setItem('tokenExpiration', expiration.toString());
   }
-  private checkTokenExpiration(): void {
-    setInterval(() => {
-      const expiration = sessionStorage.getItem('tokenExpiration');
-      if (expiration) {
-        const now = new Date().getTime();
-        if (now > parseInt(expiration, 10)) {
-          this.logout(); 
-          this.router.navigate(['/']);
-        }
-      }
-    }, 60000); // Verifica cada 60 segundos
-  }
+  
   getToken(): string | null {
     return sessionStorage.getItem(this.tokenKey);
   }
@@ -74,8 +62,7 @@ export class UserService {
     sessionStorage.removeItem(this.tokenKey);
     sessionStorage.removeItem('tokenExpiration');
   }
-
-  
+ 
   getUsers(skip: number = 0, limit: number = 10): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/users?skip=${skip}&limit=${limit}`, { headers }).pipe(
@@ -85,10 +72,6 @@ export class UserService {
       })
     );
   }
-
-  
-
-
 
   deleteUser(userId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/users/${userId}`, {
