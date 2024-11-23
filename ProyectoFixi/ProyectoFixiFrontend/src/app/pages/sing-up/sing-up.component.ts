@@ -27,7 +27,6 @@ export class SingUpComponent {
     this.router.navigate(['/login']);
   }
 
-  // Método para registrar usuario
   register() {
     if (this.password !== this.passwordConfirm) {
       alert('Las contraseñas no coinciden');
@@ -38,13 +37,11 @@ export class SingUpComponent {
       email: this.email,
       password: this.password,
       tipo_usuario: this.tipoUsuario,
-      perfil_id: null 
     };
 
     this.userService.register(userData).subscribe(
       (response) => {
         console.log('Usuario registrado exitosamente:', response);
-        this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error en el registro:', error);

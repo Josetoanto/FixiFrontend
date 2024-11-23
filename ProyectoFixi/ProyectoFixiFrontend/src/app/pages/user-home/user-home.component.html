@@ -8,7 +8,9 @@
       [title]="card.title"
       [imageUrl]="card.imageUrl"
       [fixisAvailable]="card.fixisAvailable"
-      [minPrice]="card.minPrice">
+      [minPrice]="card.minPrice"
+      [routerLink]="['/categoria', card.title]"
+      >
     </app-card>
 </div>
   

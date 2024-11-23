@@ -50,6 +50,49 @@
 .menuBtn {
     width: 32px;
     height: 32px;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 25px;
     cursor: pointer;
 }
+
+.menuContainer {
+  position: relative;
+
+  .menuBtn {
+    cursor: pointer;
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 1%;
+    background-color: #333;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      display: block;
+
+      &:hover {
+        background-color: #444;
+      }
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #555;
+      margin: 5px 0;
+    }
+  }
+
+  &:hover .dropdownMenu,
+  .dropdownMenu.open {
+    display: flex;
+  }
+}
+
